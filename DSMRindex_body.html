@@ -807,22 +807,16 @@
 <!--             <div style="text-align:center">Wh/Wp: <b><span id="wpwh">-</span> <span>%</span></b></div> -->
         </div>
                 	
-		<a href="#HoursTab" style="display:flex">
-        <div class=card id=l3 style="display:block">
-            <h1 id=Ph><span class="iconify" data-icon="mdi-lightning-bolt"></span><span data-i18n-key="dsh-energy">Elektra</span></h1>
-            <canvas class="chart-container" id="container-3"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
+		<div class=card id=l3 style="display:block">
+            <h1><span class="iconify" data-icon="mdi-format-vertical-align-top"></span>Hoogste Piek</h1>
     		<hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-kwh">Vandaag [kWh]</div>
-            <h2 id=P>0.0</h2>
-            <!--h3>max: <span id="Pmax">0.0</span></h3>
-            <h3>min: <span id="Pmin">0.0</span></h3-->
+            <div style="text-align:center">Piek deze maand [kW]</div>
+            <h2 id=peak_month_card>-</h2>
         </div>
-    	</a>
+    	<!-- original l3 Netto Verbr. replaced by Hoogste Piek -->
+    	<div style="display:none">
+            <span id=P>0.0</span>
+        </div>
     	<div class=card id=l6 style="display:none">
             <h1 id=Ph><span class="iconify" data-icon="mdi-home-import-outline"></span><span data-i18n-key="dsh-delivered">Afname</span></h1>
             <canvas class="chart-container" id="container-6"></canvas>
