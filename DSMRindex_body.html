@@ -809,10 +809,12 @@
                 	
 		<div class=card id=l3 style="display:block">
             <h1><span class="iconify" data-icon="mdi-format-vertical-align-top"></span>Hoogste Piek</h1>
-            <div style="position:absolute;left:-9999px;height:0;overflow:hidden">
-              <canvas class="chart-container" id="container-3"></canvas>
-              <div id=legenda><div class="lblVerbuik vandaag">v</div><div class="lblVerbuik gisteren">g</div><div class="lblVerbuik eergisteren">e</div></div>
-            </div>
+            <canvas class="chart-container" id="container-3" style="max-height:1px;opacity:0;overflow:hidden"></canvas>
+			<div id=legenda style="max-height:1px;opacity:0;overflow:hidden">
+				<div class="lblVerbuik vandaag">v</div>
+				<div class="lblVerbuik gisteren">g</div>
+				<div class="lblVerbuik eergisteren">e</div>
+			</div>
     		<hr/>
             <div style="text-align:center">Piek deze maand [kW]</div>
             <h2 id=peak_month_card>-</h2>
