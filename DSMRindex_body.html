@@ -808,15 +808,17 @@
         </div>
                 	
 		<div class=card id=l3 style="display:block">
-            <h1><span class="iconify" data-icon="mdi-format-vertical-align-top"></span>Hoogste Piek</h1>
+            <h1 id=Ph><span class="iconify" data-icon="mdi-format-vertical-align-top"></span>Hoogste Piek</h1>
+            <canvas class="chart-container" id="container-3" style="height:0!important;overflow:hidden"></canvas>
+			<div id=legenda style="height:0;overflow:hidden">
+				<div class="lblVerbuik vandaag">v</div>
+				<div class="lblVerbuik gisteren">g</div>
+				<div class="lblVerbuik eergisteren">e</div>
+			</div>
     		<hr/>
             <div style="text-align:center">Piek deze maand [kW]</div>
             <h2 id=peak_month_card>-</h2>
-        </div>
-    	<!-- hidden elements needed by JS -->
-    	<div style="display:none">
-            <span id=P>0.0</span>
-            <canvas id="container-3"></canvas>
+            <span id=P style="display:none">0.0</span>
         </div>
     	<div class=card id=l6 style="display:none">
             <h1 id=Ph><span class="iconify" data-icon="mdi-home-import-outline"></span><span data-i18n-key="dsh-delivered">Afname</span></h1>
