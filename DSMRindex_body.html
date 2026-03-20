@@ -807,22 +807,22 @@
 <!--             <div style="text-align:center">Wh/Wp: <b><span id="wpwh">-</span> <span>%</span></b></div> -->
         </div>
                 	
-		<div class=card id=l3 style="display:block">
-            <h1><span class="iconify" data-icon="mdi-format-vertical-align-top"></span>Hoogste Piek</h1>
-            <canvas class="chart-container" id="container-3" style="max-height:1px;opacity:0;overflow:hidden"></canvas>
-			<div id=legenda style="max-height:1px;opacity:0;overflow:hidden">
-				<div class="lblVerbuik vandaag">v</div>
-				<div class="lblVerbuik gisteren">g</div>
-				<div class="lblVerbuik eergisteren">e</div>
+		<a href="#HoursTab" style="display:flex">
+        <div class=card id=l3 style="display:block">
+            <h1 id=Ph><span class="iconify" data-icon="mdi-lightning-bolt"></span><span data-i18n-key="dsh-energy">Elektra</span></h1>
+            <canvas class="chart-container" id="container-3"></canvas>
+			<div id=legenda>
+				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
+				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
+				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
 			</div>
     		<hr/>
-            <div style="text-align:center">Piek deze maand [kW]</div>
-            <h2 id=peak_month_card>-</h2>
-            <span id=P style="display:none">0.0</span>
-            <span id=Ph style="display:none"></span>
+            <div style="text-align:center" data-i18n-key="lbl-today-kwh">Vandaag [kWh]</div>
+            <h2 id=P>0.0</h2>
         </div>
+    	</a>
     	<div class=card id=l6 style="display:none">
-            <h1><span class="iconify" data-icon="mdi-home-import-outline"></span><span data-i18n-key="dsh-delivered">Afname</span></h1>
+            <h1 id=Ph><span class="iconify" data-icon="mdi-home-import-outline"></span><span data-i18n-key="dsh-delivered">Afname</span></h1>
             <canvas class="chart-container" id="container-6"></canvas>
 			<div id=legenda>
 				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
