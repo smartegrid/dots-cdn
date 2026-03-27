@@ -46,11 +46,9 @@
 		<ul>
 			<li><a id='bEid'   	 	  data-i18n-key="mnu-eid" class='tabButton nav-item' href="#EID" style="display:none">Setup EnergyID</a></li>
 			<li><a id='bNRGM'   	  data-i18n-key="mnu-nrgm" class='tabButton nav-item' href="#NRGM" style="display:none">Koppelen</a></li>
-			<li><a id='bNETSW'   	  data-i18n-key="mnu-netsw" class='tabButton nav-item' href="#NETSW" style="display:none" onclick="fetchNetSwitchConfig()">NetSwitch</a></li>
 			<li><a id='bEditSettings' data-i18n-key="mnu-settings" class='tabButton nav-item' href="#Settings" >Settings</a></li>
 			<li><a id='bEditMonths'   data-i18n-key="mnu-editmonths" class='tabButton nav-item' href="#EditMonths" >Meterstanden</a></li>
 			<li><a id='bReset'   	  data-i18n-key="mnu-reset" class='tabButton nav-item' href="#Reset" >Reset/boot</a></li>
-			<li><a id='bSolar'   	  data-i18n-key="mnu-solar" class='tabButton nav-item' href="#Solar" >Solar Setup</a></li>
 			<li><a id='bESPHome'   	  data-i18n-key="mnu-esphome" class='tabButton nav-item' href="#ESPHome" >ESPHome</a></li>
 <!-- 			<li><a id='bAbout'   	  class='tabButton nav-item' href="#About" >About</a></li> -->
 		</ul></li>
@@ -552,91 +550,6 @@
 	<hr>Indien de pagina niet automatisch getoond wordt klik dan op <a href='/'>Home pagina</a></div>
     </section>  
 
-	<section id="Solar" class="tabName">
-		<div id=eid-setup>
-		<i id=pulse_ico class="iconify" data-icon="mdi-pulse"></i>
-		<h1 class=align-c>Solar Setup</h1><br>
-		<div data-i18n-key="sol-intro-1">Instellen van de koppeling met de PV omvormer om de opbrengst zichtbaar te maken in NRG Monitor. Deze configuratie is in te zien en te wijzigen via het bestandsbeheer van de dongle.<br>
-		<br>
-		</div>
-		<hr>
-		<form id="dataForm">
-		<p data-i18n-key="sol-sys">Welk systeem dient gekoppeld te worden?</p>
- 		  <input type="radio" id="pv_enphase" name="solar_system" value="Enphase" onClick="ShowHidePV();" checked="checked">
- 		  <label for="enphase">Enphase</label><br>
-		  <input type="radio" id="pv_solaredge" name="solar_system" value="SolarEdge" onClick="ShowHidePV();">
-		  <label for="solaredge">SolarEdge</label><br>
-		<br> 
-			<label for="wp" data-i18n-key="sol-wp">Systeemvermogen (Wp):</label><br>
-			<input type="number" id="wp" name="wp" value=3500><br><br>
-			<label for="Interval" data-i18n-key="sol-interval">Update interval (seconden):</label><br>
-			<input type="number" id="interval" name="interval" value=10><br><br>
-			<label for="gw_url" data-i18n-key="sol-url">Gateway url of ip-adres:</label><br>
-			<input type="text" id="gw_url" name="gw_url" value="https://envoy/api/v1/production" style="width: 100%"><br><br>
-			<label for="token" data-i18n-key="sol-token">Token:</label><br>
-			<input type="text" id="token" name="token" placeholder="eg eyJraWQiOiI3ZDEwMDA1ZC03ODk5LTRk" style="width: 100%"><br><br>
-			<div id="conf_token" style="display: none">
-				<label for="siteid" data-i18n-key="sol-siteid">SiteID:</label><br>
-				<input type="number" id="siteid" name="siteid" placeholder="eg 125231"><br><br>
-			</div>	
-		<hr>						
-			<div class=align-c><button type="button" onclick="SolarSendData()" data-i18n-key="btn-save">Opslaan</button></div>
-		</form>    
-		</div>
-    </section>  
-	
-	<section id="NETSW" class="tabName">
-		<div id=eid-setup>
-		<h1 class=align-c>NetSwitch</h1>
-    <label class=ntsw ><span data-i18n-key="net-intro-1">Zodra het netvermogen boven (min = terugleveren)</span>
-    <input class=ntsw type="number" id="value" value="100" oninput="NetSwitchUpdateBar()">
-	</label>
-
-    <label class=ntsw data-i18n-key="net-intro-2">Watt komt, gaat het Shelly toestel of IO </label>
-    <select class=ntsw id="switch_on" onchange="NetSwitchUpdateBar()">
-        <option value="true" >ON</option>
-        <option value="false" selected>OFF</option>
-    </select>
-    
-    <div class="bar-container" >
-        <div class="bar-container-inner" onclick="BarOnClick()">
-        <div class="bar-fill-left" id="barFillLeft">ON</div>
-        <div class="bar-divider"></div>
-        <div class="bar-fill-right" id="barFillRight">OFF</div>
-        </div>
-        <div class="bar-text" id="barText">100 Watt</div>
-    </div>
-    
-    <hr>
-    <label class=ntsw data-i18n-key="net-on-delay">Inschakelvertraging (seconden)</label>
-    <input class=ntsw type="number" id="time_true" min="10" max="3600" value="60" >
-
-    <label class=ntsw data-i18n-key="net-off-delay">Uitschakelvertraging (seconden)</label>
-    <input class=ntsw type="number" id="time_false" min="10" max="3600" value="120" >
-	
-	<label class=ntsw data-i18n-key="net-start-state">State on startup</label>
-	<select class=ntsw id="default">
-        <option value="true" >ON</option>
-        <option value="false" selected>OFF</option>
-    </select>
-	<hr>
-	<p data-i18n-key="net-io-shelly">Make a choice to enable shelly or dongle IO. When IO = 0 shelly is active. Any other value disables Shelly function.</p>
-	<label class=ntsw data-i18n-key="net-io">Dongle IO number</label>
-    <input class=ntsw type="number" id="dongle_io" value="0" min="0" max="44" maxlength="1" >
-	<div id=shelly_conf>
-	<hr>
-    <label class=ntsw data-i18n-key="net-ip">IP address or hostname</label>
-    <input class=ntsw type="text" id="device" placeholder="ip of hostnaam" >
-
-    <label class=ntsw data-i18n-key="net-relay">Relais ID (default 0):</label>
-    <input class=ntsw type="number" id="relay" value="0" min="0" max="4" maxlength="1" >
-
-    </div><br>
-    <br>
-	<div class=align-c><button onclick="SendNetSwitchJson()" data-i18n-key="btn-save">Opslaan</button></div>
-	</div>
-    </section> 	
-	
 	<section id="NRGM" class="tabName">
 		<div id=eid-setup>
 		<i id=pulse_ico class="iconify" data-icon="mdi-pulse"></i>
@@ -654,7 +567,7 @@
 	
 	<section id="EID" class="tabName">
 		<div id=eid-setup>
-		<h1 class=align-c><img src="https://cdn.jsdelivr.net/gh/mhendriks/P1-Dongel-ESP32@master/cdn/assets/eid.png" alt="EnergyID"></h1><br>
+		<h1 class=align-c><img src="https://cdn.jsdelivr.net/gh/smartegrid/dots-cdn@main/assets/eid.png" alt="EnergyID"></h1><br>
 		<div data-i18n-key="eid-intro-1">P1 Dongle Pro koppelen aan EnergyID monitoring systeem.</div>
 		<div data-i18n-key="eid-intro-2"> Dit geeft uw inzichten in uw verbruik en mogelijkheid om dit te vergelijken met andere gelijke profielen.</div>
 		<div>
@@ -748,7 +661,7 @@
             <h1 id=dash_eid_h style="background:green;"><span class="iconify" data-icon="mdi-calendar-check"></span><span data-i18n-key="dsh-eid">Stroomplanner<span></h1>
 		  <div id=eid-info>Vind de ideale momenten om stroom te verbruiken.</div>
 		  <div id="stroomplanner-hours"></div>
-		  <div id=eid-powered>Powered by: <a href="https://www.energyid.eu/nl/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/mhendriks/P1-Dongel-ESP32@master/cdn/assets/eid.png" alt="EnergyID"></a></div>
+		  <div id=eid-powered>Powered by: <a href="https://www.energyid.eu/nl/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/smartegrid/dots-cdn@main/assets/eid.png" alt="EnergyID"></a></div>
 		  <div id="stroomplanner-footer"></div>
         </div>
 
@@ -771,151 +684,7 @@
 
         </div>
 		</a>
-        <div class=card id=dash_solar style="display:none">
-            <h1 id=dash_solar_h style="background:#f7b638"><span class="iconify" data-icon="mdi-solar-power-variant"></span><span data-i18n-key="dsh-solar-production">Productie<span></h1>
-            <canvas class="chart-container" id="container-solar"></canvas>
-			<div id=legenda style="padding-top:25px">
-			</div>
-    		<hr/>
-			<div style="text-align:center" data-i18n-key="lbl-today-kwh">Vandaag [kWh]</div>
-            <h2 id=dash_solar_p>0.0</h2>
-            <div style="text-align:center" ><span data-i18n-key="lbl-solar-self-sufficient">Zelfvoorzienend: </span><b><span id="seue">-</span> <span>%</span></b></div>
-            <div style="text-align:center" ><span data-i18n-key="lbl-solar-self-use">Zelfverbruik: </span><b><span id="scr">-</span> <span>%</span></b></div>
-<!--             <div style="text-align:center">Wh/Wp: <b><span id="wpwh">-</span> <span>%</span></b></div> -->
-        </div>
-        
-        <div class=card id=dash_accu style="display:none">
-            <h1 id=dash_solar_h style="background:#007700"><span class="iconify" data-icon="mdi-battery-low"></span><span data-i18n-key="dsh-accu">Opslag<span></h1>
-            <canvas class="chart-container" id="container-accu"></canvas>
-			<div id=legenda style="padding-top:25px">
-			</div>
-    		<hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-kw">Power [kW]</div>
-            <h2 id=dash_accu_p>0.0</h2>
-			<div style="text-align:center" ><span data-i18n-key="lbl-accu-status">Status: </span><b><span id="accu-status">-</span></b></div>
-        </div>	
-
-  <div class=card id=dash_peak style="display:none">
-            <h1 id=dash_peak><span class="iconify" data-icon="mdi-format-vertical-align-top"></span><span data-i18n-key="dsh-peak">KwartierPiek<span></h1>
-            <canvas class="chart-container" id="container-peak"></canvas>
-			<div id=legenda style="padding-top:25px">
-			</div>
-    		<hr/>
-            <div style="text-align:center" data-i18n-key="lbl-peak-delta">Piekruimte [kW]</div>
-            <h2 id=dash_peak_delta>0.0</h2>
-            <div style="text-align:center" ><span data-i18n-key="lbl-peak-month">Piek deze maand: </span><b><span id="peak_month">-</span> <span>kW</span></b></div>
-<!--             <div style="text-align:center">Wh/Wp: <b><span id="wpwh">-</span> <span>%</span></b></div> -->
-        </div>
-                	
-		<a href="#HoursTab" style="display:flex">
-        <div class=card id=l3 style="display:block">
-            <h1 id=Ph><span class="iconify" data-icon="mdi-lightning-bolt"></span><span data-i18n-key="dsh-energy">Elektra</span></h1>
-            <canvas class="chart-container" id="container-3"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
-    		<hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-kwh">Vandaag [kWh]</div>
-            <h2 id=P>0.0</h2>
-        </div>
-    	</a>
-    	<div class=card id=l6 style="display:none">
-            <h1 id=Ph><span class="iconify" data-icon="mdi-home-import-outline"></span><span data-i18n-key="dsh-delivered">Afname</span></h1>
-            <canvas class="chart-container" id="container-6"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
-    		<hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-kwh">Vandaag [kWh]</div>
-            <h2 id=Pa>0.0</h2>
-            <!--h3>max: <span id="Pamax">0.0</span></h3>
-            <h3>min: <span id="Pamin">0.0</span></h3-->
-        </div>
-        <div class=card id=l5 style="display:none">
-            <h1 id=Ph><span class="iconify" data-icon="mdi-home-export-outline"></span><span data-i18n-key="dsh-returned">Teruglevering<span></h1>
-            <canvas class="chart-container" id="container-5"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
-    		<hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-kwh">Vandaag [kWh]</div>
-            <h2 id=Pi>0.0</h2>
-            <!--h3>max: <span id="Pimax">0.0</span></h3>
-            <h3>min: <span id="Pimin">0.0</span></h3-->
-        </div>
-        <div class=card id=l4 style="display:none">
-            <h1 id=Gh ><span class="iconify" data-icon="mdi-fire"></span><span data-i18n-key="dsh-gas">Gas<span></h1>
-            <canvas class="chart-container" id="container-4"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
-            <hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-m3">Vandaag [㎥]</div>
-            <h2 id="G">0.0</h2>
-        </div>
-                <div class=card id=l7 style="display:none">
-            <h1 id=Gh ><span class="iconify" data-icon="mdi-water"></span><span data-i18n-key="dsh-water">Water<span></h1>
-            <canvas class="chart-container" id="container-7"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
-            <hr/>
-            <div style="text-align:center" data-i18n-key="lbl-today-l">Vandaag [liter]</div>
-            <h2 id="W">0.0</h2>
-        </div>
-        <div class=card id=l2 style="display:none">
-            <h1 id=power_delivered_l2h ><span class="iconify" data-icon="mdi-sine-wave"></span><span data-i18n-key="dsh-voltage">Spanning<span></h1>
-	        <canvas class="chart-container" id="gauge-v"></canvas>
-	        <div id=legenda>
-				<div id=v1 class="lblVerbuik vandaag">1<span class="tooltiptext">fase 1</span></div>
-				<div id=v2 class="lblVerbuik gisteren" style="display:none">2<span class="tooltiptext">fase 2</span></div>
-				<div id=v3 class="lblVerbuik eergisteren" style="display:none">3<span class="tooltiptext">fase 3</span></div>
-			</div>
-            <hr/>
-            <div style="text-align:center" data-i18n-key="lbl-nbr-phases">Aantal fases</div>
-            <h2 id="fases">1</h2>
-<!-- 
-            <h3>max: <span id="power_delivered_2max">0.0</span> Volt</h3>
-            <h3>min: <span id="power_delivered_2min">0.0</span> Volt</h3>
- -->
-        </div>
-         <div class=card id=l8 style="display:none">
-            <h1 id=Qh ><span class="iconify" data-icon="mdi-heat-wave"></span><span data-i18n-key="dsh-heat">Warmte<span></h1>
-            <canvas class="chart-container" id="container-q"></canvas>
-			<div id=legenda>
-				<div class="lblVerbuik vandaag">v<span class="tooltiptext" data-i18n-key="lbl-today">Vandaag</span></div>
-				<div class="lblVerbuik gisteren">g<span class="tooltiptext" data-i18n-key="lbl-yesterday">Gisteren</span></div>
-				<div class="lblVerbuik eergisteren">e<span class="tooltiptext" data-i18n-key="lbl-2daysago">Eergisteren</span></div>
-			</div>
-            <hr/>
-            <div style="text-align:center">Vandaag [kJ]</div>
-            <h2 id="Q">0.0</h2>
-        </div>
-    </div> <!-- outer -->  
-  </section>  <!-- END Dash Tab --> 
-  
-  <div hidden id="loader"></div>
-  <div id="update">
-     <div class="overlay" id="updatePopup">
-        <div class="popup">
-            <h2 data-i18n-key="lbl_update_title">Software Update</h2>
-            <div class="progress">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <p id="updatestatus"></p>
-            <button onclick="closeUpdate()" data-i18n-key="btn_update_close">Sluiten</button>
-        </div>
-    </div>  </div> <!-- update -->
+         <!-- update -->
   </div>
   <!-- REST -->
   <div style="margin: 30px;">
