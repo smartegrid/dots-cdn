@@ -1,6 +1,7 @@
 {
   "version": "5.3.1",
   "date": "2026-04-02",
-  "firmware": "p1-protobuf-test.ino.bin",
+  "firmware": "https://github.com/smartegrid/dots-cdn/releases/download/v5.3.1/firmware.bin",
+  "merged": "https://github.com/smartegrid/dots-cdn/releases/download/v5.3.1/firmware-merged.bin",
   "changelog": "Protobuf MQTT transport, Ethernet auto-switch, NIS2 compliant"
 }
