@@ -1,0 +1,6 @@
+{
+  "version": "5.3.1",
+  "date": "2026-04-02",
+  "firmware": "p1-protobuf-test.ino.bin",
+  "changelog": "Protobuf MQTT transport, Ethernet auto-switch, NIS2 compliant"
+}
